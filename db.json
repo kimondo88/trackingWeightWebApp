@@ -1,0 +1,21 @@
+{
+	"user" : [
+	{
+		"id": 1,
+		"name": "John",
+		"lastName": "Kowalski",
+        "fullName": "John Kowalski",
+		"TrackDay": [
+            {
+                "time": 12353464576563 , 
+                "day" : 1, 
+                "month": 2, 
+                "year": 2020,
+                "weight" : 110
+            }
+        ]
+	}]
+}
+				
+			
+

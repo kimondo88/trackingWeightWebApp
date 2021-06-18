@@ -1,0 +1,28 @@
+{
+  "name": "trackingweightwebapp",
+  "version": "0.0.1",
+  "description": "An internet app about tracking user weight and showing chart",
+  "main": "index.html",
+  "scripts": {
+    "test": "scripts", 
+    "start": "index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimondo88/trackingWeightWebApp.git"
+  },
+  "keywords": [
+    "weightloss",
+    "charts",
+    "app"
+  ],
+  "author": "Adam \"Kim\" Tarczewski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kimondo88/trackingWeightWebApp/issues"
+  },
+  "homepage": "https://github.com/kimondo88/trackingWeightWebApp#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
