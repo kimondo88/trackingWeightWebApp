@@ -1,10 +1,24 @@
-//Just testing if git configured to github.
-//test Second for ssh key.
+const jsonServer = require("json-server");
+const express = require("express");
+const path = require("path");
+const server = jsonServer.create();
+const router = jsonServer.router("./data/db.json");
+const middlewares = jsonServer.defaults();
 
-function chooseUser(user){
-    
-}
+server.use(middlewares);
 
-function trackWeight(){
-    
-}
+server.use("/src", express.static(__dirname + "/src/"));
+
+server.use("/home", (req, res) => {
+  res.sendFile(path.join(__dirname + "/index.html"));
+});
+
+server.use("/db", (req, res) =>
+  res.sendFile(path.join(__dirname + "/data/db.json"))
+);
+
+server.use(router);
+const port = process.env.PORT || 3000
+server.listen(port, () => {
+  console.log(`JSON Server is running on port ${port}`);
+}); 

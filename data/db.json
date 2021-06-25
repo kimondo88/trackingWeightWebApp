@@ -5,7 +5,7 @@
 		"name": "John",
 		"lastName": "Kowalski",
         "fullName": "John Kowalski",
-		"TrackDay": [
+		"trackDay": [
             {
                 "time": 12353464576563 , 
                 "day" : 1, 

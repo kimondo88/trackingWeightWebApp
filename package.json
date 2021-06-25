@@ -4,8 +4,10 @@
   "description": "An internet app about tracking user weight and showing chart",
   "main": "index.html",
   "scripts": {
-    "test": "scripts", 
-    "start": "index.html"
+    "test": "scripts",
+    "start": "index.html",
+    "dev": "nodemon ./index.js",
+    "secondary": "cross-env PORT=3001 nodemon ./index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,10 @@
   },
   "homepage": "https://github.com/kimondo88/trackingWeightWebApp#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "json-server": "^0.15.1",
+    "nodemon": "^2.0.7"
   }
 }
