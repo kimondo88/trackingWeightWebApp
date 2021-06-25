@@ -1,4 +1,5 @@
-<htm>
+<!DOCTYPE html>
+<html>
     <head>
         <!-- Bootstrap Files -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -8,7 +9,7 @@
 	<link rel="stylesheet" href="css/page.css">
 
     </head>
-    <body>
+    <body class>
         <!-- Graph -->
 	<div class="container">
 		<div class="d-flex flex-row pb-2">
@@ -46,8 +47,41 @@
 			<h3>Track</h3>
 			<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal"><span
 					class="oi oi-minus pr-2"></span>Change Tracked Time</button>
-            <button onClick="TrackWeight()" type="button" class="btn btn-outline-success"><span
+            <button onClick="trackWeight()" type="button" class="btn btn-outline-success"><span
                 class="oi oi-plus pr-2"></span>Track today weight</button>
+	
+	<!-- New Weight Entry -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">New Weight</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="weightId"><small class="text-muted">Enter your current weight</small></label>
+							<input type="number" class="form-control" id="weightId" aria-describedby="emailHelp" placeholder="Enter Weight">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addWeight()">Add Weight</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!--Bootstrap files -->	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- Chart JS -->			
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.2/dist/Chart.min.js"></script>
+	<!--- Page JS -->
     <script src="index.js"></script>
     </body>
 </htm>
