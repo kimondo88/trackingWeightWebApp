@@ -47,8 +47,8 @@
 			<h3>Track</h3>
 			<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal"><span
 					class="oi oi-minus pr-2"></span>Change Tracked Time</button>
-            <button onClick="trackWeight()" type="button" class="btn btn-outline-success"><span
-                class="oi oi-plus pr-2"></span>Track today weight</button>
+            <button onClick="dbg()" type="button" class="btn btn-outline-success"><span
+                class="oi oi-plus pr-2"></span>Update Chart</button>
 	
 	<!-- New Weight Entry -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
@@ -82,7 +82,7 @@
 	<!-- Chart JS -->			
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.2/dist/Chart.min.js"></script>
 	<!--- Page JS -->
-    <script src="/src/page.js"></script>
-	<script src="/src/chartData.js"></script>
+    <script src="/dist/page.bundle.js"></script>
+	<script src="/dist/chart.bundle.js"></script>
     </body>
 </html>

@@ -3,8 +3,10 @@
 //test Second for ssh key.
 
 let ctx = document.getElementById('monthlyWeight').getContext('2d');
-let weightData;
-let weeeklyLabels = ['Pon', 'Wto'] ; 
+let weightData = [];
+let weeklyLabels = ['Pon', 'Wto'] ; 
+
+import {dbg} from './chartdata.js'
 
 function chooseUser(user){
     
@@ -13,6 +15,8 @@ function chooseUser(user){
 function trackWeight(){
     
 }
+
+dbg(weightChart, weightData, weeklyLabels);
 
 var weightChart = new Chart(ctx, {
     type: 'bar',

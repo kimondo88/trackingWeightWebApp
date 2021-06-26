@@ -1,22 +1,26 @@
-const { default: axios} = require("axios");
+//const { default: axios} = require("axios");
+
+import axios from "axios"; 
+
+export function dbg(weightChart, weightData, weeklyLabels){
 
 let data; 
 
-( () => {
-
-
 async function getChartData(id){
-    let {data} = await axios.get(`http://localhost:3000/users/${id}`);
+    let data = await axios.get(`http://localhost:3000/users/${id}`).then((response) =>{
+        console.log(response.data);
+        return response.data;
+    });
     return data; 
 }
 
 data = getChartData(1);
 
-})
-
-async function updateChart(data){
-    for( item of data.trackDay){
-        weightData.push(item.weight);
+async function updateChart(data, weightChart, weightData, weeklyLabels){
+    console.log(data);
+    console.log(data.users[0]);
+    for( const item in data.trackDay){
+        weightData.push(parseFloat(item.weight));
     }
     console.log(data); 
     weightData.forEach((value1, weightData) => {
@@ -27,6 +31,10 @@ async function updateChart(data){
 
     weightChart.data.labels = Array.from(weeklyLabels);
     weightChart.update();
+
 }
 
 updateChart(data); 
+
+}
+

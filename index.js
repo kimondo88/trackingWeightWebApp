@@ -8,12 +8,13 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 
 server.use("/src", express.static(__dirname + "/src/"));
+server.use("/dist", express.static(__dirname + "/dist/"));
 
 server.use("/home", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-server.use("/db", (req, res) =>
+server.use("/users", (req, res) =>
   res.sendFile(path.join(__dirname + "/data/db.json"))
 );
 
