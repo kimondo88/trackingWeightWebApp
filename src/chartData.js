@@ -6,21 +6,33 @@ export function dbg(weightChart, weightData, weeklyLabels){
 
 let data; 
 
-async function getChartData(id){
-    let data = await axios.get(`http://localhost:3000/users/${id}`).then((response) =>{
-        console.log(response.data);
-        return response.data;
-    });
+async function insertChartData(id){
+    let data = await axios.get(`http://localhost:3000/users/${id}`)
+    .then( response =>{
+        return response })
+    .then( data => {
+        let insert = Array.from(data.data.users); 
+        console.log(insert[0])
+        console.log(genWeight(insert)); 
+        let t = insert[0];
+        let track = t.trackDay; 
+        let w = track[0];
+        weightData.push(parseFloat(w.weight));
+        return data;
+    })
+    console.log(weightData);
     return data; 
+    
 }
 
-data = getChartData(1);
+data = insertChartData(1);
 
 async function updateChart(data, weightChart, weightData, weeklyLabels){
     console.log(data);
-    console.log(data.users[0]);
-    for( const item in data.trackDay){
-        weightData.push(parseFloat(item.weight));
+    let temp = 
+    console.log(temp);
+    for( const item in temp){
+        ;
     }
     console.log(data); 
     weightData.forEach((value1, weightData) => {
@@ -33,8 +45,14 @@ async function updateChart(data, weightChart, weightData, weeklyLabels){
     weightChart.update();
 
 }
-
-updateChart(data); 
+console.log(data)
+//updateChart(data); 
 
 }
 
+function* genWeight(array){
+    var i = 0; 
+    while(true){
+        return yield array[i++];
+    }
+}
