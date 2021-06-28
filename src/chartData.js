@@ -13,7 +13,7 @@ async function insertChartData(id){
     .then( data => {
         let insert = Array.from(data.data.users); 
         console.log(insert[0])
-        console.log(genWeight(insert)); 
+        console.log(genWeight(insert).next().value); 
         let t = insert[0];
         let track = t.trackDay; 
         let w = track[0];
@@ -56,3 +56,4 @@ function* genWeight(array){
         return yield array[i++];
     }
 }
+

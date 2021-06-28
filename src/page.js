@@ -6,7 +6,8 @@ let ctx = document.getElementById('monthlyWeight').getContext('2d');
 let weightData = [];
 let weeklyLabels = ['Pon', 'Wto'] ; 
 
-import {dbg} from './chartdata.js'
+import {dbg} from './chartdata.js';
+import {log} from './utils.js';
 
 function chooseUser(user){
     
@@ -17,6 +18,7 @@ function trackWeight(){
 }
 
 dbg(weightChart, weightData, weeklyLabels);
+log(69, 1); 
 
 var weightChart = new Chart(ctx, {
     type: 'bar',
