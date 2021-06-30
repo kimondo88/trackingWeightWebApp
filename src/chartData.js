@@ -11,12 +11,13 @@ async function insertChartData(id){
     .then( response =>{
         return response })
     .then( data => {
-        let insert = Array.from(data.data.users); 
-        console.log(insert[0])
-        console.log(genWeight(insert).next().value); 
-        let t = insert[0];
-        let track = t.trackDay; 
-        let w = track[0];
+        //let insert = Array.from(data.data); 
+        //console.log(insert[0])
+        //console.log(genWeight(insert).next().value); 
+        //let t = insert[0];
+        let track = JSON.parse(JSON.stringify(data)); 
+        console.log(track.data.trackDay); 
+        let w = track.data.trackDay[0]; 
         weightData.push(parseFloat(w.weight));
         return data;
     })
@@ -27,7 +28,7 @@ async function insertChartData(id){
 
 data = insertChartData(1);
 
-async function updateChart(data, weightChart, weightData, weeklyLabels){
+async function updateChart(data){
     console.log(data);
     let temp = 
     console.log(temp);
@@ -47,6 +48,8 @@ async function updateChart(data, weightChart, weightData, weeklyLabels){
 }
 console.log(data)
 //updateChart(data); 
+
+return data;
 
 }
 

@@ -14,9 +14,9 @@ server.use("/home", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-server.use("/users", (req, res) =>
-  res.sendFile(path.join(__dirname + "/data/db.json"))
-);
+// server.use("/users", (req, res) =>
+//   res.sendFile(path.join(__dirname + "/data/db.json"))
+// );
 
 server.use(router);
 const port = process.env.PORT || 3000

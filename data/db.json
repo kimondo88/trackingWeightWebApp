@@ -1,20 +1,20 @@
 {
-	"users" : 
-        [{  
-		"id": 1,
-		"name": "John",
-		"lastName": "Kowalski",
-        "fullName": "John Kowalski",
-		"trackDay": [{
-            "time": 12353464576563 , 
-            "weight" : 110
-            },
-            {
-            "time": 123222676563 , 
-            "weight" : 89
-            }]
-        }]
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Dorian",
+      "trackDay": [
+        {
+          "1625069569263": {
+            "weight": 108
+          }
+        },
+        {
+          "1625070002681": {
+            "weight": 108
+          }
+        }
+      ]
+    }
+  ]
 }
-				
-			
-

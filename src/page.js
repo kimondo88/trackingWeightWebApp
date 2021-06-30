@@ -17,8 +17,8 @@ function trackWeight(){
     
 }
 
-dbg(weightChart, weightData, weeklyLabels);
-log(69, 1); 
+let data = dbg(weightChart, weightData, weeklyLabels);
+log(1, 108); 
 
 var weightChart = new Chart(ctx, {
     type: 'bar',
