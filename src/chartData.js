@@ -2,12 +2,10 @@
 
 import axios from "axios"; 
 
-export function dbg(weightChart, weightData, weeklyLabels){
 
-let data; 
-
-async function insertChartData(id){
-    let data = await axios.get(`http://localhost:3000/users/${id}`)
+export async function insertChartData(id){
+    let weightData = []; 
+    await axios.get(`http://localhost:3000/users/${id}`)
     .then( response =>{
         return response })
     .then( data => {
@@ -15,43 +13,43 @@ async function insertChartData(id){
         //console.log(insert[0])
         //console.log(genWeight(insert).next().value); 
         //let t = insert[0];
-        let track = JSON.parse(JSON.stringify(data)); 
-        console.log(track.data.trackDay); 
-        let w = track.data.trackDay[0]; 
-        weightData.push(parseFloat(w.weight));
-        return data;
+        const track = data.data; 
+        console.log(track.trackDay); 
+        // function that check for current month in time
+        for(let item = 0; item < track.trackDay.length; item++){
+            const timeStamp = Object.keys(track.trackDay[item])[0];
+            if(getCurrentMonthOfYear(new Date(Number(timeStamp)))){
+                let i = track.trackDay[item]; 
+                weightData.push(parseFloat(i[timeStamp].weight));
+            }
+            console.log(item);
+        }
     })
+
     console.log(weightData);
-    return data; 
-    
+    return weightData; 
+};
+
+function isToday(timeStamp){
+    const today = new Date();
+    return (
+        timeStamp.getDate() === today.getDate() && 
+        timeStamp.getMonth() === today.getMonth() &&
+        timeStamp.getYear() === today.getYear()
+    )
+};
+
+function getCurrentMonthOfYear(timeStamp){
+    const today = new Date();
+    return (
+        timeStamp.getMonth() === today.getMonth() && 
+        timeStamp.getYear() === today.getYear()
+    )
 }
 
-data = insertChartData(1);
 
-async function updateChart(data){
-    console.log(data);
-    let temp = 
-    console.log(temp);
-    for( const item in temp){
-        ;
-    }
-    console.log(data); 
-    weightData.forEach((value1, weightData) => {
-        weightChart.data.datasets.forEach((dataset) => {
-            dataset.data.push(value1);
-        });
-    });
 
-    weightChart.data.labels = Array.from(weeklyLabels);
-    weightChart.update();
-
-}
-console.log(data)
-//updateChart(data); 
-
-return data;
-
-}
+//console.log(data)
 
 function* genWeight(array){
     var i = 0; 

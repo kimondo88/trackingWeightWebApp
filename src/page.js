@@ -3,11 +3,10 @@
 //test Second for ssh key.
 
 let ctx = document.getElementById('monthlyWeight').getContext('2d');
-let weightData = [];
 let weeklyLabels = ['Pon', 'Wto'] ; 
 
-import {dbg} from './chartdata.js';
-import {log} from './utils.js';
+import {insertChartData} from './chartdata';
+import {log} from './utils';
 
 function chooseUser(user){
     
@@ -17,8 +16,29 @@ function trackWeight(){
     
 }
 
-let data = dbg(weightChart, weightData, weeklyLabels);
-log(1, 108); 
+async function updateChart(){
+
+    weightChart.data.datasets.forEach((dataset) => {
+        dataset.data = [];
+    });
+
+    console.log('pushing value x ' + weightData.length); 
+
+    for(let i = 0; i <= weightData.length ; i++){
+        for(let x = 0; x <= weightChart.data.datasets.length; x++){
+            let temp = weightChart.data.datasets[x]
+            temp.data.push(weightData[i]);
+            console.log('pushing value' + weightData[i]); 
+        }
+           
+    }
+
+    weightChart.data.labels = Array.from(weeklyLabels);
+    weightChart.update();
+
+}
+
+//log(1, 107); 
 
 var weightChart = new Chart(ctx, {
     type: 'bar',
@@ -45,3 +65,6 @@ var weightChart = new Chart(ctx, {
         }
     }
 });
+
+const weightData = Array.from(insertChartData(1));
+updateChart(); 
