@@ -16,21 +16,20 @@ function trackWeight(){
     
 }
 
-async function updateChart(){
+async function updateChart(weightData){
 
     weightChart.data.datasets.forEach((dataset) => {
         dataset.data = [];
     });
 
-    console.log('pushing value x ' + weightData.length); 
+    console.log('pushing value x ' + weightData.length + ' ' + weightData); 
 
     for(let i = 0; i <= weightData.length ; i++){
-        for(let x = 0; x <= weightChart.data.datasets.length; x++){
-            let temp = weightChart.data.datasets[x]
-            temp.data.push(weightData[i]);
+            weightChart.data.datasets.forEach( (dataset) =>{
+                dataset.data.push(weightData[i]); 
+            })
             console.log('pushing value' + weightData[i]); 
-        }
-           
+        
     }
 
     weightChart.data.labels = Array.from(weeklyLabels);
@@ -66,5 +65,14 @@ var weightChart = new Chart(ctx, {
     }
 });
 
-const weightData = Array.from(insertChartData(1));
-updateChart(); 
+
+async function just(){
+
+    let weightData = await insertChartData(1); 
+    
+    console.log(weightData + 'weight dataArr');
+    updateChart(weightData); 
+    
+}
+
+just();

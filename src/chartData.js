@@ -26,7 +26,7 @@ export async function insertChartData(id){
         }
     })
 
-    console.log(weightData);
+    console.log(weightData + 'weight data');
     return weightData; 
 };
 
