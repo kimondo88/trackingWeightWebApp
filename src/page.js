@@ -6,6 +6,11 @@ let ctx = document.getElementById('monthlyWeight').getContext('2d');
 let weeklyLabels = ['Pon', 'Wto'] ; 
 let weight = document.getElementById("weightId"); 
 
+let button = document.getElementById("addWeightButton"); 
+button.addEventListener("click", function(){
+    addWeight()
+}); 
+
 import {insertChartData} from './chartdata';
 import {log} from './utils';
 
@@ -76,14 +81,13 @@ async function just(){
     
 }
 
-export function add(){
+async function addWeight(){
     let newWeight = parseFloat(weight.value);
     if(newWeight === 'undefinied'){
         console.log('Not provided weight: undefinied'); 
     }else{
         log(1, newWeight); 
     }
-   return null;
 }
 
 just();

@@ -19,9 +19,8 @@ export async function log(id, weight){
 
     let checkForDay = dataTrackDay.pop(); 
     let timeToCheck = Object.keys(checkForDay)[0]; 
-    if(checkForTheSameDay(timeToCheck)){
-        console.log('You already logged somethnig for today');
-    }else{
+    console.log(timeToCheck); 
+    if(! await checkForTheSameDay(timeToCheck)){
         if( typeof weight === 'number') {
             await axios.put(`http://localhost:3000/users/${id}`, putBody, {
             header: {
@@ -31,6 +30,9 @@ export async function log(id, weight){
         });
         console.log("Succesful Write to JSON"); 
         }else{ return console.log('WTF no number')}
+        
+    }else{
+        console.log('You already logged something for today');
         //console.log(JSON.stringify(putBody));
     }
     
@@ -47,10 +49,12 @@ function weightObjectToPost(data, time){
 
 async function checkForTheSameDay(timeToCheck){
     let time = new Date();
-    time = Date.now();
+    timeToCheck = new Date(parseInt(timeToCheck));
+    console.log(time, ' is time ', timeToCheck);
+
     let bool = time.getDate() === timeToCheck.getDate() 
     && time.getMonth() === timeToCheck.getMonth() 
     && time.getFullYear() === timeToCheck.getFullYear();
-    timeToCheck.getDate(); 
+    console.log(bool);
     return bool;
 }
