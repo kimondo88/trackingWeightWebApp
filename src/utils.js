@@ -36,15 +36,6 @@ export async function log(id, weight){
         //console.log(JSON.stringify(putBody));
     }
     
-
-}
-
-function weightObjectToPost(data, time){
-    if(data === 'number'){  
-    return { "time" : time,
-    "weight" : data
-    }}
-    else{ return null }
 }
 
 async function checkForTheSameDay(timeToCheck){

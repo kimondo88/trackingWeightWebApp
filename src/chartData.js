@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export async function insertChartData(id){
-    let weightData = []; 
+    const weightData = []; 
     await axios.get(`http://localhost:3000/users/${id}`)
     .then( response =>{
         return response })
@@ -18,6 +18,8 @@ export async function insertChartData(id){
         // function that check for current month in time
         for(let item = 0; item < track.trackDay.length; item++){
             const timeStamp = Object.keys(track.trackDay[item])[0];
+            //temp check if check func works
+            checkForDaysInMonth(new Date(Number(timeStamp))); 
             if(getCurrentMonthOfYear(new Date(Number(timeStamp)))){
                 let i = track.trackDay[item]; 
                 weightData.push(parseFloat(i[timeStamp].weight));
@@ -27,6 +29,7 @@ export async function insertChartData(id){
     })
 
     console.log(weightData + 'weight data');
+    
     return weightData; 
 };
 
@@ -47,7 +50,21 @@ function getCurrentMonthOfYear(timeStamp){
     )
 }
 
+const checkForDaysInMonth = (timeStamp) => {
+    timeStamp.getDate();
+    const empty = [];
+    const thirty = [3, 5, 8, 9, 10]; 
+    const thirtyOne = [0, 2, 4, 6, 7, 11 ];
+    const twentyEight = [1];
+    if(thirty.findIndex(element => element === timeStamp.getMonth()) != -1){
+        console.log(timeStamp.toDateString()); 
+    }
+    if(thirtyOne.findIndex(element => element === timeStamp.getMonth()) != -1){
+        console.log(timeStamp.toDateString()); 
+    }
 
+
+}
 
 //console.log(data)
 

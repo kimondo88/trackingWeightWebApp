@@ -3,7 +3,7 @@
 //test Second for ssh key.
 
 let ctx = document.getElementById('monthlyWeight').getContext('2d');
-let weeklyLabels = ['Pon', 'Wto'] ; 
+let weeklyLabels = ['Pon', 'Wto', 'Sro', 'Czw', 'Pia', 'Sob', 'Nie'] ; 
 let weight = document.getElementById("weightId"); 
 
 let button = document.getElementById("addWeightButton"); 
@@ -46,13 +46,13 @@ async function updateChart(weightData){
 //log(1, 107); 
 
 var weightChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: [],
         datasets: [{
             label: '# of Kilo',
             data: [],
-            backgroundColor: [
+            borderColor: [
                 'rgba(238, 184, 104, 1)',
                 'rgba(75, 166, 223, 1)',
                 'rgba(239, 118, 122, 1)',
