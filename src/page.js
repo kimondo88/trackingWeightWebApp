@@ -12,7 +12,7 @@ button.addEventListener("click", function(){
 }); 
 
 import {insertChartData} from './chartdata';
-import {log} from './utils';
+import {log, populateLabel} from './utils';
 
 function chooseUser(user){
     
@@ -22,7 +22,7 @@ function trackWeight(){
     
 }
 
-async function updateChart(weightData){
+async function updateChart(id, weightData){
 
     weightChart.data.datasets.forEach((dataset) => {
         dataset.data = [];
@@ -38,7 +38,7 @@ async function updateChart(weightData){
         
     }
 
-    weightChart.data.labels = Array.from(weeklyLabels);
+    weightChart.data.labels = Array.from(await populateLabel(id));
     weightChart.update();
 
 }
@@ -77,7 +77,7 @@ async function just(){
     let weightData = await insertChartData(1); 
     
     console.log(weightData + 'weight dataArr');
-    updateChart(weightData); 
+    updateChart(1, weightData); 
     
 }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function log(id, weight){
+async function log(id, weight){
     let current = new Date();
     current = Date.now();
     const {data} = await axios.get(`http://localhost:3000/users/${id}`); 
@@ -49,3 +49,31 @@ async function checkForTheSameDay(timeToCheck){
     console.log(bool);
     return bool;
 }
+
+async function populateLabel(id){
+    const label = [];
+    const dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; 
+    const {data} = await axios.get(`http://localhost:3000/users/${id}`); 
+    const dataTrackDay = data.trackDay || [];
+    let checkForDay = dataTrackDay.pop(); 
+    let timeToCheck = Object.keys(checkForDay)[0];
+    const f = new Date(parseInt(timeToCheck)).getDate();
+    timeToCheck = new Date(parseInt(timeToCheck))
+    let temp = timeToCheck.toString();
+    temp = temp.slice(0, 2);
+    label.push(temp);
+    let day = dayOfWeek.indexOf( item => item === temp );  
+    for(let i = 1; i <= f; i++){
+        if(day > 0){
+            day -= 1; 
+        }else{ day = 6}
+        label.push(dayOfWeek[day]); 
+    }; 
+    return label.reverse();
+};
+
+async function sameMonth(compare1, compare2){
+    return compare1.getMonth() === compare2.getMonth()
+};
+
+export {log, populateLabel}
