@@ -21,7 +21,6 @@ export async function insertChartData(id){
             const timeStamp = Object.keys(track.trackDay[item])[0];
             const readDate = new Date(Number(timeStamp)); 
             //temp check if check func works
-            checkForDaysInMonth(readDate); 
             if(getCurrentMonthOfYear(readDate)){
                 if((readDate.getDate() - double) > 1 ){
                     let fill = weightData.pop()
@@ -62,21 +61,7 @@ function getCurrentMonthOfYear(timeStamp){
     )
 }
 
-const checkForDaysInMonth = (timeStamp) => {
-    timeStamp.getDate();
-    const empty = [];
-    const thirty = [3, 5, 8, 9, 10]; 
-    const thirtyOne = [0, 2, 4, 6, 7, 11 ];
-    const twentyEight = [1];
-    if(thirty.findIndex(element => element === timeStamp.getMonth()) != -1){
-        console.log(timeStamp.toDateString()); 
-    }
-    if(thirtyOne.findIndex(element => element === timeStamp.getMonth()) != -1){
-        console.log(timeStamp.toDateString()); 
-    }
 
-
-}
 
 //console.log(data)
 

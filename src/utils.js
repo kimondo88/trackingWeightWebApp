@@ -57,26 +57,28 @@ async function populateLabel(id){
     const dataTrackDay = data.trackDay || [];
     let checkForDay = dataTrackDay.pop(); 
     let timeToCheck = Object.keys(checkForDay)[0];
-    const f = new Date(parseInt(timeToCheck)).getDate()
-    timeToCheck = new Date(parseInt(timeToCheck))
-    let temp = timeToCheck.toString();
-    temp = temp.slice(0, 2);
+    const readDate = new Date(parseInt(timeToCheck))
+    const f = readDate.getDate()
+    let temp = readDate.toString();
+    const monthSize = checkForDaysInMonth(readDate); 
+    temp = temp.slice(0, 3);
+    console.log(`debug temp: ${temp}`);
     label1.push(temp);
-    let day = dayOfWeek.indexOf( item => item === temp );
+    let day = dayOfWeek.indexOf( temp );
+    // first for loop for getting previous days, then second loop for getting ones after current day.
     let dayToday = day;  
-    for(let i = 1; i <= f; i++){
+    for(let i = 0; i-1 <= f; i++){
         if(day > 0){
             day -= 1; 
-        }else if(day === 0){ 
         }else{ day = 6}
         label1.push(dayOfWeek[day]); 
     };
-
+    //reversing lablels array, then creating new arr for proper month tracking
     label1.reverse();
     const label = Array.from(label1);  
     day = dayToday;
 
-    for(let i = f; i <= 30; i++){
+    for(let i = f; i < monthSize; i++){
         if(day >= 0 && day < 6){  day += 1; }
         else{ day = 0;}
         label.push(dayOfWeek[day]); 
@@ -84,8 +86,26 @@ async function populateLabel(id){
     return label;
 };
 
+const checkForDaysInMonth = (timeStamp) => {
+    const empty = [];
+    const thirty = [3, 5, 8, 9, 10]; 
+    const thirtyOne = [0, 2, 4, 6, 7, 11 ];
+    const twentyEight = [1];
+    if(thirty.findIndex(element => element === timeStamp.getMonth()) != -1){
+        console.log(timeStamp.toDateString());
+        return 30;  
+    }
+    else if(thirtyOne.findIndex(element => element === timeStamp.getMonth()) != -1){
+        console.log(timeStamp.toDateString()); 
+        return 31;
+    }else{ return 28}
+
+}
+
+
 async function sameMonth(compare1, compare2){
     return compare1.getMonth() === compare2.getMonth()
 };
 
 export {log, populateLabel}
+
