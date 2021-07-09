@@ -14,15 +14,27 @@ export async function insertChartData(id){
         //console.log(genWeight(insert).next().value); 
         //let t = insert[0];
         const track = data.data; 
-        console.log(track.trackDay); 
+        console.log(track.trackDay);
+        let double = 31; 
         // function that check for current month in time
         for(let item = 0; item < track.trackDay.length; item++){
             const timeStamp = Object.keys(track.trackDay[item])[0];
+            const readDate = new Date(Number(timeStamp)); 
             //temp check if check func works
-            checkForDaysInMonth(new Date(Number(timeStamp))); 
-            if(getCurrentMonthOfYear(new Date(Number(timeStamp)))){
+            checkForDaysInMonth(readDate); 
+            if(getCurrentMonthOfYear(readDate)){
+                if((readDate.getDate() - double) > 1 ){
+                    let fill = weightData.pop()
+                    for(let x = 0; x < (readDate.getDate() - double); x++){
+                        weightData.push(fill); 
+                    }       
+                    let i = track.trackDay[item]; 
+                    weightData.push(parseFloat(i[timeStamp].weight));
+                }else{
                 let i = track.trackDay[item]; 
                 weightData.push(parseFloat(i[timeStamp].weight));
+                double = readDate.getDate(); 
+                }
             }
             console.log(item);
         }
