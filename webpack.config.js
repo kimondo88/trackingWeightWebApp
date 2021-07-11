@@ -9,5 +9,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js'
+  },
+  watchOptions: {
+    aggregateTimeout: 600,
+    ignored: ['./dist/']
   }
 };
