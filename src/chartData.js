@@ -26,7 +26,9 @@ export async function insertChartData(id){
                     let fill = weightData.pop()
                     for(let x = 0; x < (readDate.getDate() - double); x++){
                         weightData.push(fill); 
-                    }       
+                        console.log(`double: ${double}, readDate: ${readDate.getDate()}`)
+                    }
+                    double = readDate.getDate();        
                     let i = track.trackDay[item]; 
                     weightData.push(parseFloat(i[timeStamp].weight));
                 }else{
