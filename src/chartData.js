@@ -2,17 +2,12 @@
 
 import axios from "axios"; 
 
-
 export async function insertChartData(id){
     const weightData = []; 
     await axios.get(`http://localhost:3000/users/${id}`)
     .then( response =>{
         return response })
     .then( data => {
-        //let insert = Array.from(data.data); 
-        //console.log(insert[0])
-        //console.log(genWeight(insert).next().value); 
-        //let t = insert[0];
         const track = data.data; 
         console.log(track.trackDay);
         let double = 31; 
@@ -63,14 +58,11 @@ function getCurrentMonthOfYear(timeStamp){
     )
 }
 
-
-
-//console.log(data)
-
 function* genWeight(array){
     var i = 0; 
     while(true){
         return yield array[i++];
     }
 }
+
 
