@@ -11,8 +11,8 @@ export async function insertChartData(id){
     .then( data => {
         const track = data.data; 
         console.log(track.trackDay);
-        let double = 31;
-        let showOnlyThisDays = 29;  
+        let double = -300;
+        let showOnlyThisDays = 30;  
         // function that check for current month in time
         const lastItem = track.trackDay.length;
         if (lastItem < 30){
@@ -22,17 +22,20 @@ export async function insertChartData(id){
             const timeStamp = Object.keys(track.trackDay[item-1])[0];
             const readDate = new Date(Number(timeStamp));
             let repeatDoubleLoop;
+            let bool = false; 
             if(readDate.getDate() > double){
-                repeatDoubleLoop = double + (checkForDaysInMonth(readDate)-readDate.getDate()+1); 
+                repeatDoubleLoop = double + (-(checkForDaysInMonth(readDate)-readDate.getDate()));
+                bool = true;  
             }else{
-                repeatDoubleLoop = readDate.getDate() - double;
+                repeatDoubleLoop = double - readDate.getDate();
+                bool = false;
             }
             //temp check if check func works
-            if((readDate.getDate() - double) > 1 ){
+            if((double - readDate.getDate() ) > 1 || bool === true){
                 let fill = weightData.pop()
                 for(let x = 0; x < repeatDoubleLoop; x++){
                     weightData.push(fill); 
-                    console.log(`double: ${double}, readDate: ${readDate.getDate()}`)
+                    console.log(`double: ${double}, readDate: ${readDate.getDate()}, ${repeatDoubleLoop}`)
                 }
                 double = readDate.getDate();        
                 let i = track.trackDay[item-1]; 
@@ -40,7 +43,8 @@ export async function insertChartData(id){
             }else{
             let i = track.trackDay[item-1]; 
             weightData.push(parseFloat(i[timeStamp].weight));
-            double = readDate.getDate(); 
+            double = readDate.getDate();
+            console.log(`double is for a day ${double}`); 
             }
             
             console.log(item);
