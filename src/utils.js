@@ -67,7 +67,7 @@ async function populateLabel(id){
     let day = dayOfWeek.indexOf( temp );
     // first for loop for getting previous days, then second loop for getting ones after current day.
     let dayToday = day;  
-    for(let i = 0; i-1 <= f; i++){
+    for(let i = 0; i-1 <= 30; i++){
         if(day > 0){
             day -= 1; 
         }else{ day = 6}
@@ -75,18 +75,18 @@ async function populateLabel(id){
     };
     //reversing lablels array, then creating new arr for proper month tracking
     label1.reverse();
-    const label = Array.from(label1);  
-    day = dayToday;
+    //const label = Array.from(label1);  
+    // day = dayToday;
 
-    for(let i = f; i < monthSize; i++){
-        if(day >= 0 && day < 6){  day += 1; }
-        else{ day = 0;}
-        label.push(dayOfWeek[day]); 
-    }; 
-    return label;
+    // for(let i = f; i < monthSize; i++){
+    //     if(day >= 0 && day < 6){  day += 1; }
+    //     else{ day = 0;}
+    //     label.push(dayOfWeek[day]); 
+    // }; 
+    return label1;
 };
 
-const checkForDaysInMonth = (timeStamp) => {
+function checkForDaysInMonth(timeStamp){
     const empty = [];
     const thirty = [3, 5, 8, 9, 10]; 
     const thirtyOne = [0, 2, 4, 6, 7, 11 ];
@@ -107,5 +107,5 @@ async function sameMonth(compare1, compare2){
     return compare1.getMonth() === compare2.getMonth()
 };
 
-export {log, populateLabel}
+export {log, populateLabel, checkForDaysInMonth}
 

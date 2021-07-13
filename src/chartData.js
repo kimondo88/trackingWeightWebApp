@@ -1,6 +1,7 @@
 //const { default: axios} = require("axios");
 
 import axios from "axios"; 
+import { checkForDaysInMonth } from "./utils";
 
 export async function insertChartData(id){
     const weightData = []; 
@@ -10,35 +11,45 @@ export async function insertChartData(id){
     .then( data => {
         const track = data.data; 
         console.log(track.trackDay);
-        let double = 31; 
+        let double = 31;
+        let showOnlyThisDays = 29;  
         // function that check for current month in time
-        for(let item = 0; item < track.trackDay.length; item++){
-            const timeStamp = Object.keys(track.trackDay[item])[0];
-            const readDate = new Date(Number(timeStamp)); 
-            //temp check if check func works
-            if(getCurrentMonthOfYear(readDate)){
-                if((readDate.getDate() - double) > 1 ){
-                    let fill = weightData.pop()
-                    for(let x = 0; x < (readDate.getDate() - double); x++){
-                        weightData.push(fill); 
-                        console.log(`double: ${double}, readDate: ${readDate.getDate()}`)
-                    }
-                    double = readDate.getDate();        
-                    let i = track.trackDay[item]; 
-                    weightData.push(parseFloat(i[timeStamp].weight));
-                }else{
-                let i = track.trackDay[item]; 
-                weightData.push(parseFloat(i[timeStamp].weight));
-                double = readDate.getDate(); 
-                }
+        const lastItem = track.trackDay.length;
+        if (lastItem < 30){
+            showOnlyThisDays = lastItem;
+        }else{ showOnlyThisDays = 30 }
+        for(let item = lastItem; item > lastItem-showOnlyThisDays; item--){
+            const timeStamp = Object.keys(track.trackDay[item-1])[0];
+            const readDate = new Date(Number(timeStamp));
+            let repeatDoubleLoop;
+            if(readDate.getDate() > double){
+                repeatDoubleLoop = double + (checkForDaysInMonth(readDate)-readDate.getDate()+1); 
+            }else{
+                repeatDoubleLoop = readDate.getDate() - double;
             }
+            //temp check if check func works
+            if((readDate.getDate() - double) > 1 ){
+                let fill = weightData.pop()
+                for(let x = 0; x < repeatDoubleLoop; x++){
+                    weightData.push(fill); 
+                    console.log(`double: ${double}, readDate: ${readDate.getDate()}`)
+                }
+                double = readDate.getDate();        
+                let i = track.trackDay[item-1]; 
+                weightData.push(parseFloat(i[timeStamp].weight));
+            }else{
+            let i = track.trackDay[item-1]; 
+            weightData.push(parseFloat(i[timeStamp].weight));
+            double = readDate.getDate(); 
+            }
+            
             console.log(item);
         }
     })
 
     console.log(weightData + 'weight data');
     
-    return weightData; 
+    return weightData.reverse(); 
 };
 
 function isToday(timeStamp){
@@ -50,11 +61,10 @@ function isToday(timeStamp){
     )
 };
 
-function getCurrentMonthOfYear(timeStamp){
-    const today = new Date();
+function compareCurrentMonthOfYear(timeStamp, double ){
     return (
-        timeStamp.getMonth() === today.getMonth() && 
-        timeStamp.getYear() === today.getYear()
+        timeStamp.getMonth() === double.getMonth() && 
+        timeStamp.getYear() === double.getYear()
     )
 }
 
