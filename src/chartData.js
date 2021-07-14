@@ -27,23 +27,30 @@ export async function insertChartData(id){
             if(readDate.getDate() > double){
                 repeatDoubleLoop = double + (-(checkForDaysInMonth(readDate)-readDate.getDate()));
                 bool = true;  
-            }else if(item +1 > aggregateNotEx && (showOnlyThisDays !== 30)){
-                repeatDoubleLoop = 30 - showOnlyThisDays;
             }
             else{
                 repeatDoubleLoop = double - readDate.getDate();
                 bool = false;
             }
             //temp check if check func works
-            if((double - readDate.getDate() ) > 1 || bool === true || (item + 1 > aggregateNotEx)){
+            if((double - readDate.getDate() ) > 1 || bool === true ){
                 let fill = weightData.pop()
                 for(let x = 0; x < repeatDoubleLoop; x++){
                     weightData.push(fill); 
                     console.log(`double: ${double}, readDate: ${readDate.getDate()}, ${repeatDoubleLoop}`)
                 }
-                double = readDate.getDate();        
+                double = readDate.getDate();
+                }        
                 let i = track.trackDay[item-1]; 
                 weightData.push(parseFloat(i[timeStamp].weight));
+                if( item === 1 ){
+                    const lastLog = Object.keys(track.trackDay[lastItem-1])[0];
+                    repeatDoubleLoop = (30 - (new Date(Number(lastLog)).getDate() 
+                    + checkForDaysInMonth(readDate)-readDate.getDate() + 1 ));
+                    console.log(`${repeatDoubleLoop} is lastlog`); 
+                    for( let x = 1; x <  repeatDoubleLoop; x++){
+                        weightData.push(parseFloat(i[timeStamp].weight));
+                    }
             }else{
             let i = track.trackDay[item-1]; 
             weightData.push(parseFloat(i[timeStamp].weight));
