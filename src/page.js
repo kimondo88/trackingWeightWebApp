@@ -73,7 +73,7 @@ async function just(){
 
 async function addWeight(){
     let newWeight = parseFloat(weight.value);
-    if(newWeight === 'undefinied'){
+    if(newWeight === 'undefinied' || newWeight === 'NaN'){
         console.log('Not provided weight: undefinied'); 
     }else{
         log(1, newWeight); 

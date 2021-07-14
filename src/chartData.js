@@ -19,6 +19,7 @@ export async function insertChartData(id){
             showOnlyThisDays = lastItem;
         }else{ showOnlyThisDays = 30 }
         for(let item = lastItem; item > lastItem-showOnlyThisDays; item--){
+            const aggregateNotEx = lastItem-showOnlyThisDays; 
             const timeStamp = Object.keys(track.trackDay[item-1])[0];
             const readDate = new Date(Number(timeStamp));
             let repeatDoubleLoop;
@@ -26,12 +27,15 @@ export async function insertChartData(id){
             if(readDate.getDate() > double){
                 repeatDoubleLoop = double + (-(checkForDaysInMonth(readDate)-readDate.getDate()));
                 bool = true;  
-            }else{
+            }else if(item +1 > aggregateNotEx && (showOnlyThisDays !== 30)){
+                repeatDoubleLoop = 30 - showOnlyThisDays;
+            }
+            else{
                 repeatDoubleLoop = double - readDate.getDate();
                 bool = false;
             }
             //temp check if check func works
-            if((double - readDate.getDate() ) > 1 || bool === true){
+            if((double - readDate.getDate() ) > 1 || bool === true || (item + 1 > aggregateNotEx)){
                 let fill = weightData.pop()
                 for(let x = 0; x < repeatDoubleLoop; x++){
                     weightData.push(fill); 
