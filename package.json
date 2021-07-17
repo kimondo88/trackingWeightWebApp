@@ -1,6 +1,6 @@
 {
   "name": "trackingweightwebapp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "An internet app about tracking user weight and showing chart",
   "main": "index.html",
   "scripts": {
