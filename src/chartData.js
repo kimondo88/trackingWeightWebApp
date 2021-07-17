@@ -40,7 +40,6 @@ export async function insertChartData(id){
                     console.log(`double: ${double}, readDate: ${readDate.getDate()}, ${repeatDoubleLoop}`)
                 }
                 double = readDate.getDate();
-                }        
                 let i = track.trackDay[item-1]; 
                 weightData.push(parseFloat(i[timeStamp].weight));
                 if( item === 1 ){
@@ -48,9 +47,10 @@ export async function insertChartData(id){
                     repeatDoubleLoop = (30 - (new Date(Number(lastLog)).getDate() 
                     + checkForDaysInMonth(readDate)-readDate.getDate() + 1 ));
                     console.log(`${repeatDoubleLoop} is lastlog`); 
-                    for( let x = 1; x <  repeatDoubleLoop; x++){
+                    for( let x = 0; x <  repeatDoubleLoop; x++){
                         weightData.push(parseFloat(i[timeStamp].weight));
                     }
+                }            
             }else{
             let i = track.trackDay[item-1]; 
             weightData.push(parseFloat(i[timeStamp].weight));
