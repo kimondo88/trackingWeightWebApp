@@ -58,16 +58,16 @@ async function populateLabel(id){
     let checkForDay = dataTrackDay.pop(); 
     let timeToCheck = Object.keys(checkForDay)[0];
     const readDate = new Date(parseInt(timeToCheck))
-    const f = readDate.getDate()
+    //const f = readDate.getDate()
     let temp = readDate.toString();
-    const monthSize = checkForDaysInMonth(readDate); 
+    //const monthSize = checkForDaysInMonth(readDate); 
     temp = temp.slice(0, 3);
     console.log(`debug temp: ${temp}`);
     label1.push(temp);
     let day = dayOfWeek.indexOf( temp );
     // first for loop for getting previous days, then second loop for getting ones after current day.
     let dayToday = day;  
-    for(let i = 0; i-1 <= 30; i++){
+    for(let i = 1; i < 30; i++){
         if(day > 0){
             day -= 1; 
         }else{ day = 6}
